@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/createViewTitle"
+        android:layout_width="@dimen/create_event_title_width"
+        android:layout_height="@dimen/create_event_title_height"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:gravity="top"
+        android:lineHeight="@dimen/create_event_line_height"
+        android:text="@string/create_event_title"
+        android:textAppearance="@style/some_id"
+        android:textFontWeight="900"
+        android:textSize="@dimen/create_event_text_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_begin"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_begin"
+        tools:ignore="UnusedAttribute" />
+
+    <EditText
+        android:id="@+id/rectangle_3"
+        android:layout_width="274dp"
+        android:layout_height="39.16dp"
+        android:layout_marginTop="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:layout_constraintTop_toBottomOf="@+id/createViewTitle"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="84dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_begin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/create_event_guide_line_vertical_begin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_end"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/create_event_guide_line_vertical_end" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_begin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/create_event_guide_line_horizontal_begin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_end"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/create_event_guide_line_horizontal_end" />
+</androidx.constraintlayout.widget.ConstraintLayout>

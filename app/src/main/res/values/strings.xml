@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ZenSearch</string>
+    <string name="create_event_title">Создание мероприятия</string>
+
 </resources>
