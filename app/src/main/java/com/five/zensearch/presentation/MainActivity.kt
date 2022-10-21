@@ -1,8 +1,8 @@
-package com.example.zensearch.presentation
+package com.five.zensearch.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.zensearch.R
+import androidx.appcompat.app.AppCompatActivity
+import com.five.zensearch.R
 
 class MainActivity : AppCompatActivity() {
 

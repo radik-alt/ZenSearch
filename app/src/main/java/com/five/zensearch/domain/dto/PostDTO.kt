@@ -1,4 +1,4 @@
-package com.example.zensearch.domain.dto
+package com.five.zensearch.domain.dto
 
 data class PostDTO(
     val title: String?,

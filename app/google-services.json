@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "110217272690",
+    "firebase_url": "https://zesearch-default-rtdb.firebaseio.com",
+    "project_id": "zesearch",
+    "storage_bucket": "zesearch.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110217272690:android:55a8634b90237c6945d1eb",
+        "android_client_info": {
+          "package_name": "com.five.zensearch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "110217272690-9bu7mh6svntguihkf3d8kboa3ukpgmho.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYjN72SNgTxNpQw1LNrbvzNejCguMsw9w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "110217272690-9bu7mh6svntguihkf3d8kboa3ukpgmho.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
