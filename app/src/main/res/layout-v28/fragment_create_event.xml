@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/createViewTitle"
+        android:layout_width="@dimen/create_event_title_width"
+        android:layout_height="@dimen/create_event_title_height"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_begin"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_begin"
+        android:text="@string/create_event_title"
+        android:textSize="@dimen/create_event_text_size"
+        android:textStyle="bold"
+        android:textFontWeight="900"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_begin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/create_event_guide_line_vertical_begin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_end"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/create_event_guide_line_vertical_end" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_begin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/create_event_guide_line_horizontal_begin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_end"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/create_event_guide_line_horizontal_end" />
+</androidx.constraintlayout.widget.ConstraintLayout>
