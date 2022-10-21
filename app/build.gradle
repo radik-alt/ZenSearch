@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.zensearch'
+    namespace 'com.five.zensearch'
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.zensearch"
+        applicationId "com.five.zensearch"
         minSdk 21
         targetSdk 32
         versionCode 1
