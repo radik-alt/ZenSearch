@@ -25,21 +25,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 //        createUser()
     }
-/*
-/*
-CREATE USER
- */
- */
+
+    /**
+    CREATE USER
+     **/
     fun createUser() {
-        auth.createUserWithEmailAndPassword("v@emiryan.ru", "qwerty")
-            .addOnSuccessListener {
-                val user = UserDTO(
-                    it.user?.uid,
-                    "Vova", "Emiryan", "Hach", false, getToken(), "img"
-                )
+        auth.createUserWithEmailAndPassword("v@emiryan.ru", "qwerty").addOnSuccessListener {
+                val user =
+                    UserDTO(it.user?.uid, "Vova", "Emiryan", "Hach", false, getToken(), "img")
                 usersReference.child(user.id.toString()).setValue(user)
-            }
-            .addOnFailureListener {
+            }.addOnFailureListener {
                 error.value = it.message
             }
     }
