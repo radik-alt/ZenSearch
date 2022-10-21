@@ -51,6 +51,11 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation platform('com.google.firebase:firebase-bom:30.4.0')
 
+    //Navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
+
+    //FireBase
     implementation 'com.google.firebase:firebase-database-ktx'
     implementation ("com.google.firebase:firebase-messaging-ktx:$firebase_version")
 

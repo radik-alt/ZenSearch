@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_home"
+        android:title="@string/menu_home_title"
+        android:icon="@drawable/common_full_open_on_phone"/>
+
+    <item
+        android:id="@+id/menu_add_event"
+        android:title="@string/menu_add_event_title"
+        android:icon="@drawable/common_google_signin_btn_icon_dark"/>
+
+    <item
+        android:id="@+id/menu_profile"
+        android:title="@string/menu_profile_title"
+        android:icon="@drawable/common_google_signin_btn_icon_light"/>
+
+</menu>

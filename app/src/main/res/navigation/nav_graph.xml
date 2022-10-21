@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.five.zensearch.presentation.homeFragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_createPostFragment"
+            app:destination="@id/createPostFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPostFragment"
+        android:name="com.five.zensearch.presentation.createPostFragment.CreatePostFragment"
+        android:label="fragment_create_post"
+        tools:layout="@layout/fragment_create_post" />
+    <fragment
+        android:id="@+id/postDetailsFragment"
+        android:name="com.five.zensearch.presentation.postDetailsFragment.PostDetailsFragment"
+        android:label="fragment_post_details"
+        tools:layout="@layout/fragment_post_details" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.five.zensearch.presentation.profileFragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
