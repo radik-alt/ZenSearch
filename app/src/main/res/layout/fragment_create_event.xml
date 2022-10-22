@@ -6,39 +6,101 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/createViewTitle"
+        android:id="@+id/createEventTitle"
         android:layout_width="@dimen/create_event_title_width"
-        android:layout_height="@dimen/create_event_title_height"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:gravity="top"
-        android:lineHeight="@dimen/create_event_line_height"
+        android:layout_height="wrap_content"
         android:text="@string/create_event_title"
-        android:textAppearance="@style/some_id"
+        android:textAppearance="@style/create_event_title"
         android:textFontWeight="900"
         android:textSize="@dimen/create_event_text_size"
+        android:lineHeight="@dimen/create_event_line_height"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/guideline_vertical_begin"
         app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_begin"
-        tools:ignore="UnusedAttribute" />
+        tools:targetApi="p" />
+
+    <ImageView
+        android:id="@+id/createEventImage"
+        android:layout_width="0sp"
+        android:layout_height="100sp"
+        android:background="@drawable/create_event_image"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_begin"
+        app:layout_constraintTop_toBottomOf="@id/createEventTitle"
+        app:layout_constraintBottom_toTopOf="@id/createEventName"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"/>
 
     <EditText
-        android:id="@+id/rectangle_3"
-        android:layout_width="274dp"
-        android:layout_height="39.16dp"
-        android:layout_marginTop="35dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        app:layout_constraintTop_toBottomOf="@+id/createViewTitle"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="84dp" />
+        android:id="@+id/createEventName"
+        android:layout_width="@dimen/create_event_name_width"
+        android:layout_height="@dimen/create_event_name_height"
+        android:layout_marginTop="16dp"
+        android:padding="10sp"
+        android:background="@drawable/create_event_name"
+        android:hint="@string/create_event_name_hint"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintBottom_toTopOf="@id/createEventImage"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
+        app:layout_constraintStart_toEndOf="@+id/guideline_vertical_begin"
+        app:layout_constraintTop_toBottomOf="@+id/createEventImage" />
+
+
+    <EditText
+        android:id="@+id/createEventDate"
+        android:layout_width="@dimen/create_event_date_width"
+        android:layout_height="@dimen/create_event_date_height"
+        android:layout_marginTop="10.84dp"
+        android:padding="10sp"
+        android:background="@drawable/create_event_date"
+        android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
+        android:hint="@string/create_event_date_hint"
+        app:layout_constraintEnd_toStartOf="@id/createEventTime"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/guideline_vertical_begin"
+        app:layout_constraintTop_toBottomOf="@+id/createEventName" />
+
+    <EditText
+        android:id="@+id/createEventTime"
+        android:layout_width="@dimen/create_event_time_width"
+        android:layout_height="@dimen/create_event_time_height"
+        android:layout_marginTop="10.84dp"
+        android:padding="10sp"
+        android:background="@drawable/create_event_time"
+        android:hint="@string/create_event_time_hint"
+        android:drawableLeft="@drawable/ic_baseline_access_time_24"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
+        app:layout_constraintStart_toEndOf="@id/createEventDate"
+        app:layout_constraintTop_toBottomOf="@+id/createEventName" />
+
+    <EditText
+        android:id="@+id/createEventDescription"
+        android:layout_width="@dimen/create_event_description_width"
+        android:layout_height="400sp"
+        android:layout_marginTop="10.84dp"
+        android:gravity="top"
+        android:padding="10sp"
+        android:background="@drawable/create_event_description"
+        android:hint="@string/create_event_description_hint"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/createEventDate"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
+        app:layout_constraintStart_toEndOf="@+id/guideline_vertical_begin" />
+
+    <Button
+        android:id="@+id/createEventCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31sp"
+        android:background="@drawable/create_event_create"
+        android:text="@string/create_event_create"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_end"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_vertical_begin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/create_event_guide_line_vertical_begin" />
+        app:layout_constraintGuide_end="369dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_vertical_end"
@@ -52,12 +114,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="@dimen/create_event_guide_line_horizontal_begin" />
+        app:layout_constraintGuide_end="857dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_horizontal_end"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="@dimen/create_event_guide_line_horizontal_end" />
+        app:layout_constraintGuide_percent="0.95398426" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
