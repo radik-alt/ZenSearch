@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="create_event_title_width">246dp</dimen>
+    <dimen name="create_event_title_height">92dp</dimen>
+    <dimen name="create_event_text_size">32sp</dimen>
     <dimen name="create_event_guide_line_vertical_begin" >42dp</dimen>
     <dimen name="create_event_guide_line_vertical_end" >42dp</dimen>
     <dimen name="create_event_guide_line_horizontal_begin" >34dp</dimen>
     <dimen name="create_event_guide_line_horizontal_end" >41dp</dimen>
+    <dimen name="create_event_line_height" >46dp</dimen>
+    <dimen name="layout_margin_between_editText">10sp</dimen>
+    <dimen name="radius_button">15sp</dimen>
 
-    <dimen name="create_event_title_width">246dp</dimen>
-    <dimen name="create_event_title_height">92dp</dimen>
-    <dimen name="create_event_text_size">32sp</dimen>
-    <dimen name="create_event_line_height">46dp</dimen>
     <dimen name="create_event_title_font_weight">900</dimen>
 
     <dimen name="create_event_name_width">0dp</dimen>
