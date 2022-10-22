@@ -5,32 +5,29 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.five.zensearch.R
+import com.five.zensearch.com.five.zensearch.data.dto.UserDTO
+import com.five.zensearch.com.five.zensearch.presentation.logInFragment.LogInViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [LogInFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class LogInFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    lateinit var loginName: EditText
+    lateinit var loginPassword: EditText
+    lateinit var confirmButton: Button
+    lateinit var registrationButton: Button
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
+    private val viewModel: LogInViewModel by lazy {
+        ViewModelProvider(requireActivity())[LogInViewModel::class.java]
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,23 +37,41 @@ class LogInFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_log_in, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LogInFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LogInFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        loginName = view.findViewById(R.id.login_name_edittext)
+        loginPassword = view.findViewById(R.id.login_password_edittext)
+        confirmButton = view.findViewById(R.id.login_confirm_button)
+        registrationButton = view.findViewById(R.id.login_registration_button)
+        setUpClicks()
     }
+
+    private fun setUpClicks() {
+        confirmButton.setOnClickListener {
+            val name = loginName.text.toString()
+            val password = loginPassword.text.toString()
+            if (isLoginFormValid(name, password))
+                viewModel.logIn(name, password)
+            else
+                sendError()
+        }
+        registrationButton.setOnClickListener {
+            findNavController().navigate(R.id.action_logInFragment_to_registrationFragment)
+        }
+    }
+
+    private fun isLoginFormValid(name: String, password: String) = name.isNotEmpty() && password.isNotEmpty()
+
+    private fun sendError() {
+        Toast.makeText(context, ERROR_MESSAGE, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun successLogIn() {
+        findNavController().navigate(R.id.action_logInFragment_to_homeFragment)
+    }
+
+    companion object {
+        const val ERROR_MESSAGE = "Неверный логин или пароль"
+    }
+
 }

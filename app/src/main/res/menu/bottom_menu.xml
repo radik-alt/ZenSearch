@@ -7,7 +7,7 @@
         android:icon="@drawable/common_full_open_on_phone"/>
 
     <item
-        android:id="@+id/createPostFragment"
+        android:id="@+id/createEventFragment"
         android:title="@string/menu_add_event_title"
         android:icon="@drawable/common_google_signin_btn_icon_dark"/>
 
