@@ -88,24 +88,6 @@ class MainActivity : AppCompatActivity() {
         repo.cancelPost("-NEyjotGCw28VvqZ4TLh")
     }
 
-    fun createPost() {
-        val repo = PostRepoImpl(PostRemoteDataSource())
-
-        val post = PostModel(
-            title = "title",
-            name = "name",
-            address = "address",
-            description = "description",
-            tags = listOf("tags"),
-            image = "image",
-            isConfirmed = true,
-            date = Date(),
-            creatorId = "EcvBeMsL37W9QRhW3F9fHjAQNtl2" //auth.currentUser.uid
-        )
-
-        repo.createPost(post)
-    }
-
     val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) {}
