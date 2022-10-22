@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.five.zensearch.com.five.zensearch.domain.model.PostModel
 import com.five.zensearch.com.five.zensearch.presentation.homeFragment.EventsListRecyclerAdapter
 import com.five.zensearch.com.five.zensearch.presentation.homeFragment.HomeViewModel
@@ -45,5 +44,7 @@ class HomeFragment : Fragment() {
 
         return binding.root
     }
+
+
 
 }
