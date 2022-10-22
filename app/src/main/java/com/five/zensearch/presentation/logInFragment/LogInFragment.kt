@@ -22,12 +22,9 @@ class LogInFragment : Fragment() {
     lateinit var confirmButton: Button
     lateinit var registrationButton: Button
 
-
-
     private val viewModel: LogInViewModel by lazy {
         ViewModelProvider(requireActivity())[LogInViewModel::class.java]
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +40,7 @@ class LogInFragment : Fragment() {
         loginPassword = view.findViewById(R.id.login_password_edittext)
         confirmButton = view.findViewById(R.id.login_confirm_button)
         registrationButton = view.findViewById(R.id.login_registration_button)
+        observeViewModel()
         setUpClicks()
     }
 
@@ -57,6 +55,15 @@ class LogInFragment : Fragment() {
         }
         registrationButton.setOnClickListener {
             findNavController().navigate(R.id.action_logInFragment_to_registrationFragment)
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.error.observe(viewLifecycleOwner) {
+            sendError()
+        }
+        viewModel.user.observe(viewLifecycleOwner) {
+            successLogIn()
         }
     }
 

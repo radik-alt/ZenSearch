@@ -14,9 +14,9 @@ class CreateEventFragment : Fragment() {
 
 
     private lateinit var binding: FragmentCreateEventBinding
-    private val createViewModel : CreateViewModel by lazy{
-        ViewModelProvider(this)[CreateViewModel::class.java]
-    }
+//    private val createViewModel : CreateViewModel by lazy{
+//        ViewModelProvider(this)[CreateViewModel::class.java]
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +40,7 @@ class CreateEventFragment : Fragment() {
             date = Date(),
             creatorId = "EcvBeMsL37W9QRhW3F9fHjAQNtl2" //auth.currentUser.uid
         )
-        createViewModel.createPost(event)
+//        createViewModel.createPost(event)
     }
 
     private fun validEvent(title:String, address: String, description:String): Boolean {

@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private var auth: FirebaseAuth = Firebase.auth
 
-    val error: MutableLiveData<String> = MutableLiveData()
+    private val error: MutableLiveData<String> = MutableLiveData()
     private val database = Firebase.database
     private val usersReference = database.getReference("Users")
 

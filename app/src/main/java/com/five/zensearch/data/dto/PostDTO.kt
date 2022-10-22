@@ -5,7 +5,6 @@ import java.util.*
 data class PostDTO(
     val id: String?,
     val title: String?,
-    val name:String?,
     val address: String?,
     val description: String?,
     val tags: List<String>?,
