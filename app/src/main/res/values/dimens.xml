@@ -8,4 +8,6 @@
     <dimen name="create_event_guide_line_horizontal_begin" >34dp</dimen>
     <dimen name="create_event_guide_line_horizontal_end" >41dp</dimen>
     <dimen name="create_event_line_height" >46dp</dimen>
+    <dimen name="layout_margin_between_editText">10sp</dimen>
+    <dimen name="radius_button">15sp</dimen>
 </resources>
