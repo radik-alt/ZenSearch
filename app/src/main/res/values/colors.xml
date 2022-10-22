@@ -11,4 +11,5 @@
     <color name="colorButton">#8060EE</color>
     <color name="strokeInput">#BFBFBF</color>
     <color name="grey">#B8B8B8</color>
+    <color name="textColor">#7B7070</color>
 </resources>
