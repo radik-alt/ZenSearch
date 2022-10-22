@@ -1,5 +1,7 @@
 package com.five.zensearch.com.five.zensearch.data.dto
 
+import com.five.zensearch.com.five.zensearch.data.datasource.Tags
+
 data class UserDTO(
     val id: String?,
     val name: String?,
@@ -9,6 +11,6 @@ data class UserDTO(
     val premium: Boolean?,
     val token: String?,
     val image: String?,
-    val tags: List<String>? = null,
+    val tags: List<Tags>? = null,
 )
 

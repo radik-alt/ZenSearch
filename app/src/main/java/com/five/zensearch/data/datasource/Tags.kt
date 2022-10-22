@@ -21,7 +21,7 @@ sealed class Tags {
         is Games -> listOf(Sport)
         is Science -> listOf(Culture, Nature, Books)
         is Books -> listOf(Film, Culture, Science, Nature)
-        is Nature -> listOf(Science, Books, )
+        is Nature -> listOf(Science, Books)
     }
 
     object Film : Tags()

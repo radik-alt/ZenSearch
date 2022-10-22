@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.five.zensearch.com.five.zensearch.domain.model.PostModel
+import com.five.zensearch.com.five.zensearch.data.dto.PostDTO
 import com.five.zensearch.databinding.PostCardBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -15,7 +15,7 @@ class EventsListRecyclerAdapter(
     private val subscribe: (eventId: String) -> Unit,
     private val unsubscribe: (eventId: String) -> Unit
 ) :
-    ListAdapter<PostModel, EventsListRecyclerAdapter.PostViewHolder>(PostDiffCallback()) {
+    ListAdapter<PostDTO, EventsListRecyclerAdapter.PostViewHolder>(PostDiffCallback()) {
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val item = getItem(position)
@@ -33,8 +33,8 @@ class EventsListRecyclerAdapter(
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: PostModel) {
-            binding.tvEventName.text = item.name
+        fun bind(item: PostDTO) {
+            binding.tvEventName.text = item.title
             binding.tvLocation.text = item.address
             binding.tvDate.text = item.date?.let {
                 SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(
@@ -72,12 +72,12 @@ class EventsListRecyclerAdapter(
     }
 }
 
-class PostDiffCallback : DiffUtil.ItemCallback<PostModel>() {
-    override fun areItemsTheSame(oldItem: PostModel, newItem: PostModel): Boolean {
+class PostDiffCallback : DiffUtil.ItemCallback<PostDTO>() {
+    override fun areItemsTheSame(oldItem: PostDTO, newItem: PostDTO): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: PostModel, newItem: PostModel): Boolean {
+    override fun areContentsTheSame(oldItem: PostDTO, newItem: PostDTO): Boolean {
         return oldItem == newItem
     }
 }
