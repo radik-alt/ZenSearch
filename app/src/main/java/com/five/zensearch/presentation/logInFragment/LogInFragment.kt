@@ -14,13 +14,12 @@ import androidx.navigation.fragment.findNavController
 import com.five.zensearch.R
 import com.five.zensearch.com.five.zensearch.data.dto.UserDTO
 import com.five.zensearch.com.five.zensearch.presentation.logInFragment.LogInViewModel
+import com.five.zensearch.databinding.FragmentCreateEventBinding
+import com.five.zensearch.databinding.FragmentLogInBinding
 
 class LogInFragment : Fragment() {
 
-    lateinit var loginName: EditText
-    lateinit var loginPassword: EditText
-    lateinit var confirmButton: Button
-    lateinit var registrationButton: Button
+    private lateinit var binding: FragmentLogInBinding
 
     private val viewModel: LogInViewModel by lazy {
         ViewModelProvider(requireActivity())[LogInViewModel::class.java]
@@ -31,43 +30,51 @@ class LogInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_log_in, container, false)
+        binding = FragmentLogInBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginName = view.findViewById(R.id.login_name_edittext)
-        loginPassword = view.findViewById(R.id.login_password_edittext)
-        confirmButton = view.findViewById(R.id.login_confirm_button)
-        registrationButton = view.findViewById(R.id.login_registration_button)
-        observeViewModel()
+        binding.loginNameEdittext.setText("v@emiryan.ru")
+        binding.loginPasswordEdittext.setText("qwerty")
+//        observeViewModel()
         setUpClicks()
     }
 
     private fun setUpClicks() {
-        confirmButton.setOnClickListener {
-            val name = loginName.text.toString()
-            val password = loginPassword.text.toString()
-            if (isLoginFormValid(name, password))
+        binding.loginConfirmButton.setOnClickListener {
+            val name = binding.loginNameEdittext.toString()
+            val password = binding.loginPasswordEdittext.toString()
+            if (isLoginFormValid(name, password)){
+                viewModel.refreshToken()
                 viewModel.logIn(name, password)
+            }
             else
                 sendError()
         }
-        registrationButton.setOnClickListener {
+        binding.loginRegistrationButton.setOnClickListener {
             findNavController().navigate(R.id.action_logInFragment_to_registrationFragment)
         }
     }
 
     private fun observeViewModel() {
         viewModel.error.observe(viewLifecycleOwner) {
-            sendError()
+            if (it != null) {
+                sendError()
+            }
         }
         viewModel.user.observe(viewLifecycleOwner) {
-            successLogIn()
+            if (it != null) {
+                viewModel.refreshToken()
+                successLogIn()
+            }
         }
+
     }
 
-    private fun isLoginFormValid(name: String, password: String) = name.isNotEmpty() && password.isNotEmpty()
+    private fun isLoginFormValid(name: String, password: String) =
+        name.isNotEmpty() && password.isNotEmpty()
 
     private fun sendError() {
         Toast.makeText(context, ERROR_MESSAGE, Toast.LENGTH_SHORT).show()
