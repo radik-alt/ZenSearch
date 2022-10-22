@@ -25,6 +25,8 @@ class CreateEventFragment : Fragment() {
     ): View {
         binding = FragmentCreateEventBinding.inflate(inflater, container, false)
         return binding.root
+
+        
     }
 
     private fun createEvent(){
