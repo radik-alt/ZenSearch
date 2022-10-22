@@ -7,17 +7,23 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.CalendarContract
+import android.view.Menu
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.five.zensearch.App.Companion.getToken
 import com.five.zensearch.R
 import com.five.zensearch.com.five.zensearch.data.datasource.PostRemoteDataSource
 import com.five.zensearch.com.five.zensearch.data.dto.UserDTO
 import com.five.zensearch.com.five.zensearch.data.repo_impl.PostRepoImpl
 import com.five.zensearch.com.five.zensearch.domain.model.PostModel
+import com.five.zensearch.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
@@ -27,7 +33,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var navController: NavController
+    private lateinit var binding: ActivityMainBinding
 
     private var auth: FirebaseAuth = Firebase.auth
 
@@ -37,11 +43,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        //navController = Navigation.findNavController(this, R.id.nav_host)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+        val navController = navHostFragment.navController
+        binding.bottomNavigationView.setupWithNavController(navController)
+
 //        createUser()
 //        createPost()
-          cancelPost()
+//        cancelPost()
 
         requestPermissionLauncher.launch(arrayOf(
             Manifest.permission.READ_CALENDAR,
@@ -59,6 +71,12 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.options_menu, menu)
+
+        return true
     }
 
 
@@ -92,7 +110,6 @@ class MainActivity : AppCompatActivity() {
         val repo = PostRepoImpl(PostRemoteDataSource())
 
         val post = PostModel(
-            title = "title",
             name = "name",
             address = "address",
             description = "description",
@@ -133,8 +150,8 @@ class MainActivity : AppCompatActivity() {
         cal[Calendar.MINUTE] = 15
 
         values.put(CalendarContract.Events.DTSTART, cal.timeInMillis)
-        cal[Calendar.HOUR_OF_DAY] += 2
-        values.put(CalendarContract.Events.DTEND, cal.timeInMillis)
+/*        cal[Calendar.HOUR_OF_DAY] += 2
+        values.put(CalendarContract.Events.DTEND, cal.timeInMillis)*/
         values.put(CalendarContract.Events.TITLE, "title")
         values.put(CalendarContract.Events.DESCRIPTION, "description")
 
@@ -143,12 +160,6 @@ class MainActivity : AppCompatActivity() {
 
         // default calendar
         values.put(CalendarContract.Events.CALENDAR_ID, 1)
-
-        /*values.put(
-            CalendarContract.Events.RRULE, "FREQ=ONCE;"
-        )*/
-        // for one hour
-        //values.put(CalendarContract.Events.DURATION, "+P2H")
 
         values.put(CalendarContract.Events.HAS_ALARM, true)
 

@@ -4,7 +4,6 @@ import java.util.*
 
 data class PostModel (
     val id: String? = null,
-    val title: String?,
     val name:String?,
     val address: String?,
     val description: String?,

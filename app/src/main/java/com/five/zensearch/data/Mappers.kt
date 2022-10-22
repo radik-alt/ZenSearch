@@ -5,7 +5,6 @@ import com.five.zensearch.com.five.zensearch.domain.model.PostModel
 
 fun PostModel.toDTO() = PostDTO(
     id = null,
-    title = title,
     name = name,
     address = address,
     description = description,
@@ -19,7 +18,6 @@ fun PostModel.toDTO() = PostDTO(
 
 fun PostDTO.toModel() = PostModel(
     id = id,
-    title = title,
     name = name,
     address = address,
     description = description,
