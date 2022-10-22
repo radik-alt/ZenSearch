@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.five.zensearch.com.five.zensearch.domain.model.PostModel
 import com.five.zensearch.databinding.FragmentCreateEventBinding
@@ -14,9 +15,7 @@ class CreateEventFragment : Fragment() {
 
 
     private lateinit var binding: FragmentCreateEventBinding
-    private val createViewModel : CreateViewModel by lazy{
-        ViewModelProvider(this)[CreateViewModel::class.java]
-    }
+    private val createViewModel : CreateEventViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +30,7 @@ class CreateEventFragment : Fragment() {
 
     private fun createEvent(){
         val event = PostModel(
-            title = "title",
+            name = "title",
             address = "address",
             description = "description",
             tags = listOf("tags"),
@@ -40,7 +39,7 @@ class CreateEventFragment : Fragment() {
             date = Date(),
             creatorId = "EcvBeMsL37W9QRhW3F9fHjAQNtl2" //auth.currentUser.uid
         )
-        createViewModel.createPost(event)
+        //createViewModel.createPost(event)
     }
 
     private fun validEvent(title:String, address: String, description:String): Boolean {

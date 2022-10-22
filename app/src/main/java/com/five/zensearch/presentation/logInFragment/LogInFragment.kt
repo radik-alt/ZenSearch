@@ -51,7 +51,7 @@ class LogInFragment : Fragment() {
             val name = loginName.text.toString()
             val password = loginPassword.text.toString()
             if (isLoginFormValid(name, password))
-                viewModel.logIn(name, password)
+                viewModel.onLogInButtonPressed(name, password)
             else
                 sendError()
         }
