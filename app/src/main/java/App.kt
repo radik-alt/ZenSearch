@@ -19,7 +19,6 @@ class App : Application() {
 
     companion object {
         private lateinit var token: String
-
         fun getToken() = token
     }
 }
