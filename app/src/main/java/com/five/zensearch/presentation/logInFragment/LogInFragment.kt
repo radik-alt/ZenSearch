@@ -21,9 +21,8 @@ class LogInFragment : Fragment() {
 
     private lateinit var binding: FragmentLogInBinding
 
-    private val viewModel: LogInViewModel by lazy {
-        ViewModelProvider(requireActivity())[LogInViewModel::class.java]
-    }
+    private lateinit var viewModel: LogInViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,22 +35,19 @@ class LogInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(requireActivity())[LogInViewModel::class.java]
         binding.loginNameEdittext.setText("v@emiryan.ru")
         binding.loginPasswordEdittext.setText("qwerty")
-//        observeViewModel()
+        observeViewModel()
         setUpClicks()
     }
 
     private fun setUpClicks() {
         binding.loginConfirmButton.setOnClickListener {
-            val name = binding.loginNameEdittext.toString()
-            val password = binding.loginPasswordEdittext.toString()
-            if (isLoginFormValid(name, password)){
-                viewModel.refreshToken()
-                viewModel.logIn(name, password)
-            }
-            else
-                sendError()
+            val name = binding.loginNameEdittext.text.toString()
+            val password = binding.loginPasswordEdittext.text.toString()
+            viewModel.logIn(name, password)
+
         }
         binding.loginRegistrationButton.setOnClickListener {
             findNavController().navigate(R.id.action_logInFragment_to_registrationFragment)
@@ -61,31 +57,14 @@ class LogInFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.error.observe(viewLifecycleOwner) {
             if (it != null) {
-                sendError()
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
         }
         viewModel.user.observe(viewLifecycleOwner) {
             if (it != null) {
                 viewModel.refreshToken()
-                successLogIn()
+                findNavController().navigate(R.id.action_logInFragment_to_homeFragment)
             }
         }
-
     }
-
-    private fun isLoginFormValid(name: String, password: String) =
-        name.isNotEmpty() && password.isNotEmpty()
-
-    private fun sendError() {
-        Toast.makeText(context, ERROR_MESSAGE, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun successLogIn() {
-        findNavController().navigate(R.id.action_logInFragment_to_homeFragment)
-    }
-
-    companion object {
-        const val ERROR_MESSAGE = "Неверный логин или пароль"
-    }
-
 }
