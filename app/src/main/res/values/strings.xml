@@ -9,4 +9,6 @@
     <string name="menu_profile_title">Профиль</string>
     <string name="login_confirm_button">Войти</string>
     <string name="login_registration_button">Зарегистрироваться</string>
+    <string name="dont_exists_account">У вас нет учетной записи?</string>
+    <string name="sing_up_text">Регистрация</string>
 </resources>

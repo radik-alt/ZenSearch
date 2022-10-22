@@ -14,51 +14,51 @@ import androidx.navigation.fragment.findNavController
 import com.five.zensearch.R
 import com.five.zensearch.com.five.zensearch.data.dto.UserDTO
 import com.five.zensearch.com.five.zensearch.presentation.logInFragment.LogInViewModel
+import com.five.zensearch.databinding.FragmentLogInBinding
 
 class LogInFragment : Fragment() {
 
-    lateinit var loginName: EditText
-    lateinit var loginPassword: EditText
-    lateinit var confirmButton: Button
-    lateinit var registrationButton: Button
 
+    private var _binding: FragmentLogInBinding?=null
+    private val binding:FragmentLogInBinding
+        get() = _binding ?: throw RuntimeException("FragmentLogInBinding == null")
 
 
     private val viewModel: LogInViewModel by lazy {
         ViewModelProvider(requireActivity())[LogInViewModel::class.java]
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_log_in, container, false)
+    ): View {
+        _binding = FragmentLogInBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginName = view.findViewById(R.id.login_name_edittext)
-        loginPassword = view.findViewById(R.id.login_password_edittext)
-        confirmButton = view.findViewById(R.id.login_confirm_button)
-        registrationButton = view.findViewById(R.id.login_registration_button)
-        setUpClicks()
-    }
 
-    private fun setUpClicks() {
-        confirmButton.setOnClickListener {
-            val name = loginName.text.toString()
-            val password = loginPassword.text.toString()
-            if (isLoginFormValid(name, password))
-                viewModel.onLogInButtonPressed(name, password)
-            else
-                sendError()
+        binding.loginConfirmButton.setOnClickListener {
+            authUser()
         }
-        registrationButton.setOnClickListener {
+
+        binding.singUpNavigate.setOnClickListener {
             findNavController().navigate(R.id.action_logInFragment_to_registrationFragment)
         }
     }
+
+    private fun authUser() {
+        val name = binding.loginNameEdittext.text.toString()
+        val password = binding.loginPasswordEdittext.text.toString()
+        if (isLoginFormValid(name, password)) {
+            viewModel.onLogInButtonPressed(name, password)
+            findNavController().navigate(R.id.action_logInFragment_to_homeFragment)
+        }
+        else
+            sendError()
+    }
+
 
     private fun isLoginFormValid(name: String, password: String) = name.isNotEmpty() && password.isNotEmpty()
 
@@ -66,12 +66,13 @@ class LogInFragment : Fragment() {
         Toast.makeText(context, ERROR_MESSAGE, Toast.LENGTH_SHORT).show()
     }
 
-    private fun successLogIn() {
-        findNavController().navigate(R.id.action_logInFragment_to_homeFragment)
+    companion object {
+        private const val ERROR_MESSAGE = "Неверный логин или пароль"
     }
 
-    companion object {
-        const val ERROR_MESSAGE = "Неверный логин или пароль"
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
