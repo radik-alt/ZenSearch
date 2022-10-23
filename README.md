@@ -80,4 +80,4 @@
 #### Приложение:
 Главная страница | Создание анонса
 :-------------------:|:------------:
-<img src="screens/create.png" width="280" height="550"> | <img src="screens/home.png" width="280" height="550">
+<img src="screens/home.png" width="280" height="550"> | <img src="screens/create.png" width="280" height="550">
