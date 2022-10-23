@@ -1,86 +1,99 @@
 package com.five.zensearch.com.five.zensearch.presentation.homeFragment
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.five.zensearch.com.five.zensearch.data.datasource.PostRemoteDataSource
-import com.five.zensearch.com.five.zensearch.data.datasource.Tags
-import com.five.zensearch.com.five.zensearch.data.datasource.UserRemoteDataSource
 import com.five.zensearch.com.five.zensearch.data.dto.PostDTO
 import com.five.zensearch.com.five.zensearch.data.dto.UserDTO
-import com.five.zensearch.com.five.zensearch.data.repo_impl.PostRepoImpl
-import com.five.zensearch.com.five.zensearch.data.repo_impl.UserRepoImpl
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.runBlocking
 
 class HomeViewModel : ViewModel() {
-    private val postRepo = PostRepoImpl(PostRemoteDataSource())
-    private val userRepo = UserRepoImpl(UserRemoteDataSource())
-    private val user = FirebaseAuth.getInstance().currentUser
+    private val _postsLiveData = MutableLiveData<List<PostDTO>>()
+    val postsLiveData: LiveData<List<PostDTO>>
+        get() = _postsLiveData
+    private val _otherUser = MutableLiveData<UserDTO?>()
+    val otherUser: LiveData<UserDTO?>
+        get() = _otherUser
+    private val _currentUser = MutableLiveData<UserDTO?>()
+    private val currentUser: LiveData<UserDTO?>
+        get() = _currentUser
+    private val _postSend = MutableLiveData<Boolean>()
+    val postSend: LiveData<Boolean>
+        get() = _postSend
+    private val _error = MutableLiveData<String>()
+    val error: MutableLiveData<String>
+        get() = _error
 
-    private var eventsList = ArrayList<PostDTO>()
+    private val database = Firebase.database
+    private val postsReference = database.getReference("Posts")
+    private val usersReference = database.getReference("Users")
 
-    private var _recommendedEventsList: MutableLiveData<List<PostDTO>> = MutableLiveData(mutableListOf())
-    val recommendedEventsList: LiveData<List<PostDTO>> = _recommendedEventsList
+    private val localCurrentUserId = currentUserId
 
-    private var _currentUser: MutableLiveData<UserDTO> = MutableLiveData()
-    val currentUser: LiveData<UserDTO> = _currentUser
+    init {
+        getCurrentUsers(currentUserId)
+            .onEach(_currentUser::setValue)
+            .launchIn(viewModelScope)
 
-    fun getUser() {
-        user?.uid?.let {
-            userRepo.getCurrentUser(it)
-                .onEach(_currentUser::setValue)
-                .launchIn(viewModelScope)
-        }//todo не уверен, что это то id
+        observePosts(currentUserId)
+            .onEach(_postsLiveData::setValue)
+            .launchIn(viewModelScope)
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    fun generatePostsList() {
-        postRepo.getPosts()
-            .onEach {
-                eventsList = it as ArrayList<PostDTO>
-            }
-            .launchIn(viewModelScope)
-        val userTags = listOf(Tags.Science, Tags.Books)
-        val eventsPriority = ArrayList<Pair<Int, PostDTO>>()
-        eventsList.forEach {
-            val postTags = it.tags ?: listOf()
-            var postPriorityValue = 0
-            postTags.forEach { postTag ->
-                userTags.forEach { userTag ->
-                    if (userTag == postTag) {
-                        postPriorityValue += 4
-                    } else {
-                        userTag.similar.forEach { similarToUserTag ->
-                            if (postTag == similarToUserTag) {
-                                postPriorityValue++
-                            }
-                        }
+    fun getCurrentUsers(currentUserId: String): Flow<UserDTO> {
+        val currentUserFlow: MutableSharedFlow<UserDTO> = MutableSharedFlow()
+        usersReference.child(currentUserId)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    runBlocking {
+                        val user = snapshot.getValue<UserDTO>()
+                        user?.let { currentUserFlow.emit(it) }
                     }
                 }
-            }
-            eventsPriority.add(Pair(postPriorityValue, it))
-        }
-        eventsPriority.removeIf { it.first == 0 }
-        eventsPriority.sortBy { it.first }
-        eventsList = ArrayList()
-        eventsPriority.forEach {
-            eventsList.add(it.second)
-        }
-        _recommendedEventsList.value = eventsList
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+
+            })
+        return currentUserFlow
     }
 
-    fun subscribeTo(eventId: String) {
-        user?.let { postRepo.subscribeUser(it.uid, eventId) }
-        //postRepo.subscribeUser("EcvBeMsL37W9QRhW3F9fHjAQNtl2", eventId)
+    private fun observePosts(
+        currentUserId: String
+    ): Flow<List<PostDTO>> {
+        val postsFlow: MutableSharedFlow<List<PostDTO>> = MutableSharedFlow()
+        postsReference.child(currentUserId)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    runBlocking {
+                        val posts: MutableList<PostDTO> = mutableListOf()
+                        snapshot.children.forEach {
+                            it.getValue<PostDTO>()?.let { post -> posts.add(post) }
+                        }
+                        postsFlow.emit(posts)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+
+            })
+        return postsFlow
     }
 
-    fun unsubscribeTo(eventId: String) {
-        user?.let { postRepo.unsubscribeUser(it.uid, eventId) }
-        //postRepo.unsubscribeUser("EcvBeMsL37W9QRhW3F9fHjAQNtl2", eventId)
+    companion object {
+        private const val API_KEY =
+            "AAAAXB36bKU:APA91bF_PC-_TKH6cVw8dvv-0By7QQ1DPYOm25o_m0Ma4pPBFffZpTx7Ior2FDAGchlLMlIbhhLZgfG-6TypiGsgbra7sAbHaIj-MAKkCK7a1dXDFWhEgxaCaQYXT8fuvQE31HGBhRSM"
     }
 }
