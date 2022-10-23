@@ -1,9 +1,11 @@
 package com.five.zensearch.com.five.zensearch.presentation.homeFragment
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.five.zensearch.App
 import com.five.zensearch.com.five.zensearch.data.dto.PostDTO
 import com.five.zensearch.com.five.zensearch.data.dto.UserDTO
 import com.google.firebase.database.DataSnapshot
@@ -39,16 +41,21 @@ class HomeViewModel : ViewModel() {
     private val postsReference = database.getReference("Posts")
     private val usersReference = database.getReference("Users")
 
-    private val localCurrentUserId = currentUserId
+    private val localCurrentUserId = getUserId()!!
 
     init {
-        getCurrentUsers(currentUserId)
+        getCurrentUsers(localCurrentUserId)
             .onEach(_currentUser::setValue)
             .launchIn(viewModelScope)
 
-        observePosts(currentUserId)
+        observePosts(localCurrentUserId)
             .onEach(_postsLiveData::setValue)
             .launchIn(viewModelScope)
+    }
+
+    private fun getUserId(): String? {
+        val sp = App.getContext().getSharedPreferences("SP", Context.MODE_PRIVATE)
+        return sp.getString("ID", null)
     }
 
     fun getCurrentUsers(currentUserId: String): Flow<UserDTO> {

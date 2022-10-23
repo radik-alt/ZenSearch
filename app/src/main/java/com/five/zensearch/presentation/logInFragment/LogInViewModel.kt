@@ -1,13 +1,13 @@
 package com.five.zensearch.com.five.zensearch.presentation.logInFragment
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.five.zensearch.App.Companion.getContext
 import com.five.zensearch.App.Companion.getToken
-import com.five.zensearch.com.five.zensearch.data.datasource.UserRemoteDataSource
 import com.five.zensearch.com.five.zensearch.data.dto.UserDTO
-import com.five.zensearch.com.five.zensearch.data.repo_impl.UserRepoImpl
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -39,6 +39,9 @@ class LogInViewModel: ViewModel() {
             _user.value = it.currentUser
         }
         user.value?.let {
+            val sp = getContext().getSharedPreferences("SP", Context.MODE_PRIVATE).edit()
+            sp.putString("ID", it.uid)
+            sp.apply()
             getCurrentUsers(it.uid)
                 .onEach(localUser::setValue)
                 .launchIn(viewModelScope)
