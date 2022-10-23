@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         val navController = navHostFragment.navController
         binding.bottomNavigationView.setupWithNavController(navController)
-
+        supportActionBar?.hide()
 //        createUser()
 //        createPost()
 //        cancelPost()
