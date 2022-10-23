@@ -1,128 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/createEventTitle"
-        android:layout_width="@dimen/create_event_title_width"
-        android:layout_height="wrap_content"
-        android:text="@string/create_event_title"
-        android:textAppearance="@style/create_event_title"
-        android:textFontWeight="900"
-        android:textSize="@dimen/create_event_text_size"
-        android:lineHeight="@dimen/create_event_line_height"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/guideline_vertical_begin"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_begin"
-        tools:targetApi="p" />
-
-    <ImageView
-        android:id="@+id/createEventImage"
-        android:layout_width="0sp"
-        android:layout_height="100sp"
-        android:layout_marginTop="14sp"
-        android:background="@drawable/create_event_image"
-        app:layout_constraintStart_toEndOf="@id/guideline_vertical_begin"
-        app:layout_constraintTop_toBottomOf="@id/createEventTitle"
-        app:layout_constraintBottom_toTopOf="@id/createEventName"
-        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"/>
-
-    <EditText
-        android:id="@+id/createEventName"
-        android:layout_width="@dimen/create_event_name_width"
-        android:layout_height="@dimen/create_event_name_height"
-        android:layout_marginTop="16dp"
-        android:padding="10sp"
-        android:background="@drawable/create_event_name"
-        android:hint="@string/create_event_name_hint"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintBottom_toTopOf="@id/createEventImage"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
-        app:layout_constraintStart_toEndOf="@+id/guideline_vertical_begin"
-        app:layout_constraintTop_toBottomOf="@+id/createEventImage" />
-
-
-    <EditText
-        android:id="@+id/createEventDate"
-        android:layout_width="@dimen/create_event_date_width"
-        android:layout_height="@dimen/create_event_date_height"
-        android:layout_marginTop="10.84dp"
-        android:background="@drawable/create_event_date"
-        android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
-        android:gravity="left"
-        android:hint="@string/create_event_date_hint"
-        android:paddingLeft="20dp"
-        app:layout_constraintEnd_toStartOf="@id/createEventTime"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toEndOf="@+id/guideline_vertical_begin"
-        app:layout_constraintTop_toBottomOf="@+id/createEventName" />
-
-    <EditText
-        android:id="@+id/createEventTime"
-        android:layout_width="@dimen/create_event_time_width"
-        android:layout_height="@dimen/create_event_time_height"
-        android:layout_marginTop="10.84dp"
-        android:padding="10sp"
-        android:background="@drawable/create_event_time"
-        android:hint="@string/create_event_time_hint"
-        android:drawableLeft="@drawable/ic_baseline_access_time_24"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
-        app:layout_constraintStart_toEndOf="@id/createEventDate"
-        app:layout_constraintTop_toBottomOf="@+id/createEventName" />
-
-    <EditText
-        android:id="@+id/createEventDescription"
-        android:layout_width="@dimen/create_event_description_width"
-        android:layout_height="400sp"
-        android:layout_marginTop="10.84dp"
-        android:gravity="top"
-        android:padding="10sp"
-        android:background="@drawable/create_event_description"
-        android:hint="@string/create_event_description_hint"
-        android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@+id/createEventDate"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
-        app:layout_constraintStart_toEndOf="@+id/guideline_vertical_begin" />
-
-    <Button
-        android:id="@+id/createEventCreate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="31sp"
-        android:background="@drawable/create_event_create"
-        android:text="@string/create_event_create"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
-        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_end"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical_begin"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <LinearLayout
+        android:padding="20sp"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="369dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical_end"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/create_event_guide_line_vertical_end" />
+        android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_begin"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="857dp" />
+        <TextView
+            android:id="@+id/createEventTitle"
+            android:layout_width="@dimen/create_event_title_width"
+            android:layout_height="wrap_content"
+            android:text="@string/create_event_title"
+            android:textAppearance="@style/create_event_title"
+            android:textSize="@dimen/create_event_text_size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_end"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95398426" />
+        <ImageView
+            android:id="@+id/createEventImage"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_marginTop="14sp"
+            android:background="@drawable/create_event_image"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/createEventName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/create_event_name_height"
+            android:layout_marginTop="16dp"
+            android:padding="10sp"
+            android:background="@drawable/create_event_name"
+            android:hint="@string/create_event_name_hint"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintTop_toBottomOf="@+id/createEventImage" />
+
+        <GridLayout
+            android:rowCount="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_columnWeight="1"
+                android:id="@+id/createEventDate"
+                android:focusable="false"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/create_event_date_height"
+                android:layout_marginTop="10.84dp"
+                android:background="@drawable/create_event_date"
+                android:drawableStart="@drawable/ic_baseline_calendar_today_24"
+                android:gravity="left|bottom"
+                android:hint="@string/create_event_date_hint"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createEventName" />
+
+            <TextView
+                android:layout_columnWeight="1"
+                android:id="@+id/createEventTime"
+                android:layout_width="@dimen/create_event_time_width"
+                android:layout_height="@dimen/create_event_time_height"
+                android:focusable="false"
+                android:layout_marginTop="10.84dp"
+                android:background="@drawable/create_event_time"
+                android:drawableStart="@drawable/ic_baseline_access_time_24"
+                android:hint="@string/create_event_time_hint"
+                android:padding="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createEventName" />
+
+        </GridLayout>
+
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/create_event_name_height"
+            android:layout_marginTop="16dp"
+            android:padding="10sp"
+            android:background="@drawable/create_event_name"
+            android:hint="Адресс"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintTop_toBottomOf="@+id/createEventImage" />
+
+
+
+        <EditText
+            android:id="@+id/createEventDescription"
+            android:layout_width="match_parent"
+            android:layout_height="200sp"
+            android:layout_marginTop="15sp"
+            android:gravity="top"
+            android:padding="10sp"
+            android:background="@drawable/create_event_description"
+            android:hint="@string/create_event_description_hint"
+            android:inputType="text"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="10sp"
+            android:id="@+id/recyclerTags"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:textAllCaps="false"
+            android:layout_marginTop="20sp"
+            android:id="@+id/createEventCreate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/create_event_create"
+            android:text="@string/create_event_create"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </LinearLayout>
+
+
+</ScrollView>
+
+
+
+

@@ -2,9 +2,9 @@ package com.five.zensearch.com.five.zensearch.domain.model
 
 import java.util.*
 
-data class PostModel (
-    val id: String? = null,
-    val name:String?,
+data class PostModel(
+    val id: String?,
+    val title:String?,
     val address: String?,
     val description: String?,
     val tags: List<String>?,

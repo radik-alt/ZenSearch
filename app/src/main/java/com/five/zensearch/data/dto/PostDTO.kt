@@ -1,6 +1,5 @@
 package com.five.zensearch.com.five.zensearch.data.dto
 
-import com.five.zensearch.com.five.zensearch.data.datasource.Tags
 import java.util.*
 
 data class PostDTO(
@@ -8,7 +7,7 @@ data class PostDTO(
     val title:String?,
     val address: String?,
     val description: String?,
-    val tags: List<Tags>?,
+    val tags: List<String>?,
     val image: String?,
     val isConfirmed: Boolean? = false,
     val date: Date?,

@@ -7,6 +7,24 @@
     android:orientation="vertical"
     tools:context="com.five.zensearch.presentation.homeFragment.HomeFragment">
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="10sp"
+        android:padding="10sp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/search_post"
+            android:hint="Поиск"
+            android:background="@drawable/input_sing_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <HorizontalScrollView
         android:id="@+id/hsv_tags"
         android:layout_width="match_parent"
@@ -23,7 +41,29 @@
             <com.google.android.material.chip.Chip
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Спорт" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Музыка" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Кино" />
+
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Игры" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Наука" />
+
 
         </com.google.android.material.chip.ChipGroup>
 
